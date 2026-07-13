@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#7f2f37" />
+  <meta name="description" content="Hochzeitsgalerie von Holle & Lars – Fotos ansehen und eigene Bilder hochladen." />
+  <title>Holle & Lars · Hochzeitsgalerie</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --wine: #7f2f37;
+      --wine-dark: #63242b;
+      --terracotta: #b45f50;
+      --olive: #687254;
+      --cream: #fffdf9;
+      --paper: rgba(255, 255, 255, 0.91);
+      --text: #3c312d;
+      --muted: #6f625d;
+      --shadow: 0 20px 60px rgba(70, 43, 35, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(180,95,80,.13), transparent 28rem),
+        radial-gradient(circle at 90% 85%, rgba(104,114,84,.13), transparent 26rem),
+        linear-gradient(180deg, #fffdf9 0%, #fbf5ef 100%);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      overflow-x: hidden;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 18px 88px;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .card {
+      width: min(720px, 100%);
+      background: var(--paper);
+      border: 1px solid rgba(127,47,55,.13);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      padding: clamp(34px, 7vw, 70px) clamp(22px, 7vw, 74px);
+      backdrop-filter: blur(6px);
+      animation: cardIn 900ms ease-out both;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--olive);
+      font-size: clamp(.9rem, 2vw, 1.05rem);
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--wine);
+      font-family: "Great Vibes", "Segoe Script", cursive;
+      font-size: clamp(4.1rem, 14vw, 7.4rem);
+      line-height: .95;
+      font-weight: 400;
+      text-shadow: 0 2px 0 rgba(255,255,255,.8);
+    }
+
+    .date {
+      margin: 14px 0 32px;
+      color: var(--terracotta);
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      letter-spacing: .2em;
+      font-weight: 600;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: min(340px, 90%);
+      margin: 0 auto 28px;
+      color: var(--wine);
+      opacity: .72;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: currentColor;
+      opacity: .35;
+    }
+
+    .divider span {
+      font-size: 1.15rem;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      color: var(--wine-dark);
+      font-size: clamp(1.85rem, 5vw, 2.55rem);
+      font-weight: 600;
+      line-height: 1.15;
+    }
+
+    .intro {
+      max-width: 540px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: clamp(1.12rem, 3vw, 1.35rem);
+      line-height: 1.55;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin: 34px auto 18px;
+      max-width: 480px;
+    }
+
+    .button {
+      appearance: none;
+      text-decoration: none;
+      border-radius: 999px;
+      min-height: 58px;
+      padding: 15px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: inherit;
+      font-size: 1.18rem;
+      font-weight: 600;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      border: 1px solid transparent;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+    }
+
+    .button:focus-visible {
+      outline: 3px solid rgba(127,47,55,.24);
+      outline-offset: 3px;
+    }
+
+    .button-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--wine), var(--terracotta));
+      box-shadow: 0 12px 25px rgba(127,47,55,.22);
+    }
+
+    .button-primary:hover {
+      box-shadow: 0 15px 30px rgba(127,47,55,.3);
+    }
+
+    .button-secondary {
+      color: var(--wine-dark);
+      background: rgba(255,255,255,.82);
+      border-color: rgba(127,47,55,.22);
+      box-shadow: 0 8px 20px rgba(70,43,35,.08);
+    }
+
+    .hint {
+      margin: 19px auto 0;
+      color: #887a74;
+      font-size: .98rem;
+      line-height: 1.4;
+    }
+
+    footer {
+      margin-top: 34px;
+      color: var(--olive);
+      font-size: 1rem;
+    }
+
+    .floral {
+      position: fixed;
+      z-index: -1;
+      left: 50%;
+      bottom: -16px;
+      transform: translateX(-50%);
+      width: min(1060px, 118vw);
+      height: 150px;
+      opacity: .93;
+      pointer-events: none;
+      animation: flowersIn 1300ms 150ms ease-out both;
+    }
+
+    .floral svg { width: 100%; height: 100%; overflow: visible; }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(14px) scale(.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes flowersIn {
+      from { opacity: 0; transform: translate(-50%, 22px); }
+      to { opacity: .93; transform: translate(-50%, 0); }
+    }
+
+    @media (min-width: 620px) {
+      .actions { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <section class="card" aria-labelledby="title">
+      <p class="eyebrow">Unsere Hochzeitsgalerie</p>
+      <h1 id="title">Holle &amp; Lars</h1>
+      <p class="date">18 · 07 · 2026</p>
+
+      <div class="divider" aria-hidden="true"><span>❦</span></div>
+
+      <h2>Willkommen auf unserer Hochzeitsgalerie</h2>
+      <p class="intro">
+        Jeder besondere Moment erzählt eine Geschichte.
+        Danke, dass ihr unsere mit euren Fotos und Videos bereichert.
+      </p>
+
+      <div class="actions">
+        <!-- HIER DEN LINK ZUR GALERIE / ZUM DOWNLOAD EINTRAGEN -->
+        <a class="button button-primary"
+           href="https://www.dropbox.com/scl/fo/ophrt8geh4me3ar6948rj/AFcE9Ivp7TRm5MispdNTA_g?rlkey=k227qc27jvxtwg2t17o335kcz&st=78pe1vjy&dl=1"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span aria-hidden="true">📸</span>
+          Fotos &amp; Videos ansehen
+        </a>
+
+        <!-- HIER DEN LINK ZUM UPLOAD EINTRAGEN -->
+        <a class="button button-secondary"
+           href="https://www.dropbox.com/request/pex5fleevse8pdwdyaiy"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span aria-hidden="true">⬆️</span>
+          Fotos &amp; Videos hochladen
+        </a>
+      </div>
+
+      <p class="hint">
+        Beim Hochladen ist kein eigenes Konto erforderlich, sofern dein Cloud-Anbieter einen öffentlichen Upload-Link unterstützt.
+      </p>
+
+      <footer>Mit Liebe gestaltet für unsere Hochzeit · 18. Juli 2026</footer>
+    </section>
+
+    <div class="floral" aria-hidden="true">
+      <svg viewBox="0 0 1000 150" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M0 136 C115 78, 180 125, 285 105 C390 85, 410 126, 500 118 C590 126, 610 85, 715 105 C820 125, 885 78, 1000 136"
+                stroke="#687254" stroke-width="4" opacity=".9"/>
+          <g stroke="#687254" stroke-width="3" opacity=".9">
+            <path d="M68 124 C55 93, 63 60, 93 35"/>
+            <path d="M148 111 C137 86, 149 58, 171 41"/>
+            <path d="M250 108 C236 88, 241 65, 263 49"/>
+            <path d="M932 124 C945 93, 937 60, 907 35"/>
+            <path d="M852 111 C863 86, 851 58, 829 41"/>
+            <path d="M750 108 C764 88, 759 65, 737 49"/>
+          </g>
+          <g fill="#9a3842" stroke="#7f2f37" stroke-width="1.5">
+            <circle cx="92" cy="34" r="17"/><circle cx="73" cy="48" r="13"/><circle cx="111" cy="51" r="13"/>
+            <circle cx="170" cy="42" r="15"/><circle cx="153" cy="57" r="11"/><circle cx="188" cy="58" r="11"/>
+            <circle cx="263" cy="49" r="13"/><circle cx="248" cy="61" r="9"/><circle cx="277" cy="63" r="9"/>
+            <circle cx="908" cy="34" r="17"/><circle cx="927" cy="48" r="13"/><circle cx="889" cy="51" r="13"/>
+            <circle cx="830" cy="42" r="15"/><circle cx="847" cy="57" r="11"/><circle cx="812" cy="58" r="11"/>
+            <circle cx="737" cy="49" r="13"/><circle cx="752" cy="61" r="9"/><circle cx="723" cy="63" r="9"/>
+          </g>
+          <g fill="#b45f50" opacity=".96">
+            <circle cx="37" cy="112" r="9"/><circle cx="125" cy="91" r="7"/><circle cx="205" cy="115" r="8"/>
+            <circle cx="315" cy="112" r="7"/><circle cx="963" cy="112" r="9"/><circle cx="875" cy="91" r="7"/>
+            <circle cx="795" cy="115" r="8"/><circle cx="685" cy="112" r="7"/>
+          </g>
+          <g fill="#788063" opacity=".95">
+            <ellipse cx="52" cy="88" rx="8" ry="18" transform="rotate(-40 52 88)"/>
+            <ellipse cx="118" cy="72" rx="8" ry="18" transform="rotate(35 118 72)"/>
+            <ellipse cx="221" cy="87" rx="7" ry="16" transform="rotate(-28 221 87)"/>
+            <ellipse cx="948" cy="88" rx="8" ry="18" transform="rotate(40 948 88)"/>
+            <ellipse cx="882" cy="72" rx="8" ry="18" transform="rotate(-35 882 72)"/>
+            <ellipse cx="779" cy="87" rx="7" ry="16" transform="rotate(28 779 87)"/>
+          </g>
+          <g fill="#d8a55f" opacity=".85">
+            <circle cx="92" cy="42" r="5"/><circle cx="170" cy="49" r="4.5"/><circle cx="263" cy="55" r="4"/>
+            <circle cx="908" cy="42" r="5"/><circle cx="830" cy="49" r="4.5"/><circle cx="737" cy="55" r="4"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </main>
+</body>
+</html>
